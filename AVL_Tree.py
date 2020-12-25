@@ -45,8 +45,7 @@ class AVLTree:
         else:
             root.right = self.insert(root.right, val)
 
-        root.height = 1 + max(self.getHeight(root.left),
-                              self.getHeight(root.right))
+        root.height = 1 + max(self.getHeight(root.left), self.getHeight(root.right))
 
         ##############################################################
         ##                      YOUR CODE HERE                      ##
