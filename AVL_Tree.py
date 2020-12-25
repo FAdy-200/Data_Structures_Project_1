@@ -6,7 +6,7 @@ class TreeNode:
         self.height = 1
 
 #dawood added a comment
-
+# Mazen also added a comment
 class AVLTree:
     def getHeight(self, root):
         """
