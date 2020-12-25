@@ -137,14 +137,14 @@ class CircularDeque:
 
 
 
-myCircularDeque = CircularDeque(3)      # set the size to be 3
-print(myCircularDeque.insertRear(1))    # return true
-print(myCircularDeque.insertRear(2))    # return true
-print(myCircularDeque.insertFront(3))   # return true
-print(myCircularDeque.insertFront(4))   # return false, the queue is full
-print(myCircularDeque.getRear())        # return 2
-print(myCircularDeque.isFull())         # return true
-print(myCircularDeque.deleteRear())     # return true
-print(myCircularDeque.insertFront(4))   # return true
-print(myCircularDeque.getFront())       # return 4
+# myCircularDeque = CircularDeque(3)      # set the size to be 3
+# print(myCircularDeque.insertRear(1))    # return true
+# print(myCircularDeque.insertRear(2))    # return true
+# print(myCircularDeque.insertFront(3))   # return true
+# print(myCircularDeque.insertFront(4))   # return false, the queue is full
+# print(myCircularDeque.getRear())        # return 2
+# print(myCircularDeque.isFull())         # return true
+# print(myCircularDeque.deleteRear())     # return true
+# print(myCircularDeque.insertFront(4))   # return true
+# print(myCircularDeque.getFront())       # return 4
 

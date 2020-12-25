@@ -91,11 +91,11 @@ class AVLTree:
         if root.left is not None:
             if root.right is not None:
                 if (root.left.height - root.right.height) > 1:
-                    if root.left.height == 3 and root.right.height == 1 and l == 2:
+                    if root.left.height == 3 and root.right.height == 1 and l == 2:  # checking to see if a double rotation is needed
                         root.left = self.rotateLeft(root.right)
                     root = self.rotateRight(root)
                 elif root.left.height - root.right.height < -1:
-                    if root.left.height == 1 and root.right.height == 3 and r == 2:
+                    if root.left.height == 1 and root.right.height == 3 and r == 2:  # checking to see if a double rotation is needed
                         root.right = self.rotateRight(root.right)
                     root = self.rotateLeft(root)
             elif root.height > 2:

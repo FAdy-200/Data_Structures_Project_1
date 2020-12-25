@@ -25,11 +25,11 @@ def printLevelOrder(root):
         cq.deleteFront()
     print("\n")
 
-# myTree = AVLTree()
-# root = None
-# nums = [33, 13, 52, 9, 21, 61, 8, 11]
-# for num in nums:
-#     root = myTree.insert(root, num)
-# printLevelOrder(root)
-# myTree.delete(root, 13)
-# printLevelOrder(root)
+myTree = AVLTree()
+root = None
+nums = [33, 13, 52, 9, 21, 61, 8, 11]
+for num in nums:
+    root = myTree.insert(root, num)
+printLevelOrder(root)
+myTree.delete(root, 13)
+printLevelOrder(root)
