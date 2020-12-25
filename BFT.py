@@ -10,16 +10,20 @@ def printLevelOrder(root):
         return
     last_level = 2 ** root.height    # Maximum number of Nodes in last level + 1
     cq = CircularDeque(last_level)
-    current = root
+    previous_level = 1               # Keep track of level of last printed node
+    current = (root, previous_level)
     cq.insertFront(current)
     while not cq.isEmpty():
         current = cq.getFront()
-        if current != None:
-            print(current.val, end = " ")
-            cq.insertRear(current.left)
-            cq.insertRear(current.right)
+        if current[0] != None:
+            if previous_level < current[1]:
+                print()
+            print(current[0].val, end = " ")
+            cq.insertRear((current[0].left, current[1] + 1))
+            cq.insertRear((current[0].right, current[1]+ 1))
+            previous_level = current[1]
         cq.deleteFront()
-    print()
+    print("\n")
 
 # myTree = AVLTree()
 # root = None
