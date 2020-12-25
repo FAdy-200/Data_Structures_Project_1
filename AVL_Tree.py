@@ -5,7 +5,6 @@ class TreeNode:
         self.right = right
         self.height = 1
 
-#dawood added a comment
 
 class AVLTree:
     def getHeight(self, root):
@@ -33,7 +32,7 @@ class AVLTree:
             return root
         return self.getMinValueNode(root.left)
 
-    def insert(self, root, val):
+    def insert(self, root, val, l=0, r=0):
         """
         Insert node with target value "val"
         """
@@ -41,19 +40,20 @@ class AVLTree:
         if not root:
             return TreeNode(val)
         elif val < root.val:
-            root.left = self.insert(root.left, val)
+            l += 1
+            r = 0
+            root.left = self.insert(root.left, val, l, r)
         else:
-            root.right = self.insert(root.right, val)
-
-        root.height = 1 + max(self.getHeight(root.left), self.getHeight(root.right))
-
-        ##############################################################
-        ##                      YOUR CODE HERE                      ##
-        ##############################################################
+            r += 1
+            l = 0
+            root.right = self.insert(root.right, val, l, r)
+        root.height = 1 + max(self.getHeight(root.left),
+                              self.getHeight(root.right))
+        root = self.__rotate(root, l, r)
 
         return root
 
-    def delete(self, root, val):
+    def delete(self, root, val, l=0, r=0):
         """
         Delete a node with target value "val"
         """
@@ -61,8 +61,12 @@ class AVLTree:
         if not root:
             return root
         elif val < root.val:
+            l += 1
+            r = 0
             root.left = self.delete(root.left, val)
         elif val > root.val:
+            r += 1
+            l = 0
             root.right = self.delete(root.right, val)
         else:
             if root.left is None:
@@ -76,30 +80,52 @@ class AVLTree:
             root.right = self.delete(root.right, temp.val)
         if root is None:
             return root
-
         root.height = 1 + max(self.getHeight(root.left),
                               self.getHeight(root.right))
+        root = self.__rotate(root, l, r)
 
-        ##############################################################
-        ##                      YOUR CODE HERE                      ##
-        ##############################################################
+        return root
 
+    def __rotate(self, root, l, r):
+
+        if root.left is not None:
+            if root.right is not None:
+                if (root.left.height - root.right.height) > 1:
+                    if root.left.height == 3 and root.right.height == 1 and l == 2:
+                        root.left = self.rotateLeft(root.right)
+                    root = self.rotateRight(root)
+                elif root.left.height - root.right.height < -1:
+                    if root.left.height == 1 and root.right.height == 3 and r == 2:
+                        root.right = self.rotateRight(root.right)
+                    root = self.rotateLeft(root)
+            elif root.height > 2:
+                root = self.rotateRight(root)
+        elif root.height > 2:
+            root = self.rotateLeft(root)
         return root
 
     def rotateLeft(self, root):
         """
         Left rotate the root tree
         """
-
-        ##############################################################
-        ##                      YOUR CODE HERE                      ##
-        ##############################################################
+        rr = root.right
+        root.right = rr.left
+        rr.left = root
+        root.height = 1 + max(self.getHeight(root.left),
+                              self.getHeight(root.right))
+        rr.height = 1 + max(self.getHeight(rr.left),
+                            self.getHeight(rr.right))
+        return rr
 
     def rotateRight(self, root):
         """
         Right rotate the root tree
         """
-
-        ##############################################################
-        ##                      YOUR CODE HERE                      ##
-        ##############################################################
+        rr = root.left
+        root.left = rr.right
+        rr.right = root
+        root.height = 1 + max(self.getHeight(root.left),
+                              self.getHeight(root.right))
+        rr.height = 1 + max(self.getHeight(rr.left),
+                            self.getHeight(rr.right))
+        return rr
